@@ -155,3 +155,8 @@ nav.main a:hover{background:rgba(255,255,255,.12)}
 .trustbar span{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.20)}
 footer.site{background:#0f1e3d;-webkit-backdrop-filter:none;backdrop-filter:none;border-top:none}
 .copyright{border-top:1px solid rgba(255,255,255,.15)}
+
+/* --- Live search --- */
+.search-wrap{margin:0 0 18px}
+.search-box{width:100%;padding:12px 18px;border:1px solid #dbe1ee;border-radius:999px;font-size:1rem;background:#fff;color:var(--ink);outline:none}
+.search-box:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.15)}

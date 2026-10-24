@@ -13,3 +13,17 @@
   }, { threshold: 0.12 });
   items.forEach(function (el) { io.observe(el); });
 })();
+
+// The App Wire — live search: filter cards on pages that have a search box
+(function () {
+  document.querySelectorAll('.search-box').forEach(function (box) {
+    box.addEventListener('input', function () {
+      var q = box.value.trim().toLowerCase();
+      var scope = box.closest('main') || document;
+      scope.querySelectorAll('.card').forEach(function (c) {
+        var t = c.textContent.toLowerCase();
+        c.style.display = (!q || t.indexOf(q) !== -1) ? '' : 'none';
+      });
+    });
+  });
+})();
