@@ -137,3 +137,21 @@ h2.section-title{color:#fff}
 
 /* --- Top 100 page --- */
 .rank{font-size:1.7rem;font-weight:800;color:#2563eb;line-height:1;margin-bottom:6px}
+
+/* --- Professional refinement: calm light theme, deep navy, one blue accent --- */
+body{background:#f4f6fb;background-attachment:scroll}
+header.site{background:#0f1e3d;-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom:none;box-shadow:0 2px 12px rgba(15,23,42,.18)}
+.ticker{background:#0b1526;-webkit-backdrop-filter:none;backdrop-filter:none}
+.card,article.post,article.page{background:#ffffff;-webkit-backdrop-filter:none;backdrop-filter:none;border:1px solid #e5e8f2;border-radius:14px;box-shadow:0 2px 10px rgba(15,23,42,.06)}
+.card:hover{box-shadow:0 12px 28px rgba(15,23,42,.12)}
+h2.section-title{color:#16224a}
+.section-sub{color:#5b6474}
+.btn{background:#2563eb;box-shadow:0 4px 12px rgba(37,99,235,.25);border:none}
+.btn:hover{background:#1d4ed8}
+.download-btn{background:#16a34a;box-shadow:0 4px 12px rgba(22,163,74,.25);border:none}
+.verdict{background:#eef2ff;-webkit-backdrop-filter:none;backdrop-filter:none}
+.pros,.cons{background:#ffffff;-webkit-backdrop-filter:none;backdrop-filter:none}
+nav.main a:hover{background:rgba(255,255,255,.12)}
+.trustbar span{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.20)}
+footer.site{background:#0f1e3d;-webkit-backdrop-filter:none;backdrop-filter:none;border-top:none}
+.copyright{border-top:1px solid rgba(255,255,255,.15)}
