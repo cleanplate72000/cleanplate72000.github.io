@@ -29,3 +29,28 @@ footer.site h3{color:#fff;margin:.2em 0 .5em;font-size:1rem}
 footer.site a{color:#c7d2fe;display:block;margin:4px 0;font-size:.92rem}
 .copyright{border-top:1px solid #3730a3;padding:14px 0;font-size:.85rem;color:#a5b4fc}
 @media(max-width:640px){.proscons{grid-template-columns:1fr}.hero h1{font-size:1.6rem}}
+
+/* --- Professional motion --- */
+html{scroll-behavior:smooth}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.hero{animation:fadeUp .7s ease both}
+.hero h1{animation:fadeUp .7s .1s ease both}
+.hero p{animation:fadeUp .7s .2s ease both}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+.card{transition:transform .3s ease,box-shadow .3s ease}
+.card:hover{transform:translateY(-6px);box-shadow:0 14px 30px rgba(30,27,75,.14)}
+.btn,.download-btn{transition:transform .2s ease,background .2s ease,box-shadow .2s ease}
+.btn:hover,.download-btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(37,99,235,.3)}
+nav.main a{transition:color .2s ease,opacity .2s ease}
+nav.main a:hover{opacity:1}
+.logo{transition:transform .3s ease}
+.logo:hover{transform:scale(1.03)}
+article.post,article.page{animation:fadeIn .5s ease both}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .hero,.hero h1,.hero p,article.post,article.page{animation:none}
+  .reveal{opacity:1;transform:none;transition:none}
+  .card,.btn,.download-btn,.logo{transition:none}
+}
