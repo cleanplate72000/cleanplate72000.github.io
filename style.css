@@ -134,3 +134,6 @@ h2.section-title{color:#fff}
 .trustbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
 .trustbar span{font-size:.85rem;color:#e0e7ff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);padding:6px 13px;border-radius:999px}
 @media(max-width:640px){.card.featured{grid-template-columns:1fr}.card.featured .card-thumb img{height:200px;min-height:0}.card.featured .card-body{padding:20px}}
+
+/* --- Top 100 page --- */
+.rank{font-size:1.7rem;font-weight:800;color:#2563eb;line-height:1;margin-bottom:6px}
