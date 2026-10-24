@@ -27,3 +27,114 @@
     });
   });
 })();
+
+// The App Wire — chatbot widget (rule-based, answers from the site's own posts)
+(function () {
+  var DATA_URL = '/chat-data.json';
+  var cache = null, loading = false;
+  function loadData(cb) {
+    if (cache) { cb(cache); return; }
+    if (loading) { setTimeout(function () { loadData(cb); }, 200); return; }
+    loading = true;
+    fetch(DATA_URL).then(function (r) { return r.json(); }).then(function (d) { cache = d; loading = false; cb(d); }).catch(function () { loading = false; cb([]); });
+  }
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function link(p) { return '<a href="/' + p.slug + '">' + esc(p.title) + '</a>'; }
+  function norm(s) { return s.toLowerCase().replace(/[^a-z0-9 ]/g, ' '); }
+  function appWords(title) {
+    return norm(title).replace(/review/g, ' ').split(' ').filter(function (w) { return w.length > 2; });
+  }
+  var wrap = document.createElement('div');
+  wrap.innerHTML = '<button class="chat-fab" aria-label="Open chat">💬</button>' +
+    '<div class="chat-panel" role="dialog" aria-label="The App Wire chat">' +
+    '<div class="chat-head"><div><b>The App Wire Assistant</b><br><span>Ask about apps, reviews &amp; news</span></div>' +
+    '<button class="chat-close" aria-label="Close chat">×</button></div>' +
+    '<div class="chat-msgs"></div>' +
+    '<div class="chat-chips">' +
+    '<button class="chat-chip">Best free apps</button>' +
+    '<button class="chat-chip">Latest reviews</button>' +
+    '<button class="chat-chip">Top 100 apps</button>' +
+    '<button class="chat-chip">Is it safe?</button></div>' +
+    '<form class="chat-form"><input class="chat-input" type="text" placeholder="Ask about an app…" aria-label="Type your message" autocomplete="off">' +
+    '<button class="chat-send" type="submit">Send</button></form></div>';
+  document.body.appendChild(wrap);
+  var fab = wrap.querySelector('.chat-fab');
+  var panel = wrap.querySelector('.chat-panel');
+  var msgs = wrap.querySelector('.chat-msgs');
+  var input = wrap.querySelector('.chat-input');
+  function addMsg(text, who) {
+    var d = document.createElement('div');
+    d.className = 'chat-msg ' + who;
+    d.innerHTML = text;
+    msgs.appendChild(d);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+  fab.addEventListener('click', function () {
+    panel.classList.toggle('open');
+    if (panel.classList.contains('open') && !msgs.children.length) {
+      addMsg('Hi! 👋 I can help you find apps on The App Wire. Try a chip below, or type an app name — for example, <b>CapCut</b>.', 'bot');
+    }
+    if (panel.classList.contains('open')) { input.focus(); }
+  });
+  wrap.querySelector('.chat-close').addEventListener('click', function () { panel.classList.remove('open'); });
+  wrap.querySelectorAll('.chat-chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      addMsg(esc(chip.textContent), 'user');
+      handle(chip.textContent);
+    });
+  });
+  wrap.querySelector('.chat-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = input.value.trim();
+    if (!v) { return; }
+    input.value = '';
+    addMsg(esc(v), 'user');
+    handle(v);
+  });
+  function handle(q) {
+    var n = ' ' + norm(q) + ' ';
+    loadData(function (posts) {
+      var news = posts.filter(function (p) { return p.kicker === 'Gaming News'; });
+      if (n.indexOf(' hello ') !== -1 || n.indexOf(' hi ') !== -1 || n.indexOf(' hey ') !== -1) {
+        addMsg('Hello! 👋 Ask me about any app, or try <b>Latest reviews</b> or <b>Top 100 apps</b>.', 'bot'); return;
+      }
+      if (n.indexOf(' best free ') !== -1 || n.indexOf(' best app ') !== -1) {
+        addMsg('Here are our best free app picks: <a href="/posts/best-photo-editing-apps.html">10 Best Free Photo Editing Apps for Android (2026)</a> — and the full ranked list is on the <a href="/top-100.html">Top 100 page</a>.', 'bot'); return;
+      }
+      if (n.indexOf(' top 100 ') !== -1) {
+        addMsg('The <a href="/top-100.html">Top 100 apps page</a> lists every reviewed app, ranked — tap any app to read its full professional review.', 'bot'); return;
+      }
+      if (n.indexOf(' latest ') !== -1 || n.indexOf(' new ') !== -1 || n.indexOf(' recent ') !== -1) {
+        var top3 = posts.slice(0, 3).map(link).join('<br>• ');
+        addMsg('Our latest posts:<br>• ' + (top3 || 'No posts yet.'), 'bot'); return;
+      }
+      if (n.indexOf(' gaming news ') !== -1 || n.indexOf(' news ') !== -1) {
+        var n3 = news.slice(0, 3).map(link).join('<br>• ');
+        addMsg('Latest gaming news:<br>• ' + (n3 || 'No news posts yet — check back soon.'), 'bot'); return;
+      }
+      if (n.indexOf(' safe ') !== -1 || n.indexOf(' apk ') !== -1 || n.indexOf(' virus ') !== -1 || n.indexOf(' trust ') !== -1) {
+        addMsg('Yes, it is safe ✅ Every download button on this site goes only to the official Google Play Store (or App Store). We never host or link APK files.', 'bot'); return;
+      }
+      if (n.indexOf(' contact ') !== -1 || n.indexOf(' email ') !== -1 || n.indexOf(' reach ') !== -1) {
+        addMsg('You can reach us through the <a href="/contact.html">Contact page</a>.', 'bot'); return;
+      }
+      if (n.indexOf(' about ') !== -1 || n.indexOf(' what is ') !== -1 || n.indexOf(' who ') !== -1) {
+        addMsg('The App Wire is a free app review site. We test trending Android &amp; iPhone apps and publish honest reviews with real Play Store screenshots — downloads only from official stores. More on the <a href="/about.html">About page</a>.', 'bot'); return;
+      }
+      if (n.indexOf(' search ') !== -1 || n.indexOf(' find ') !== -1 || n.indexOf(' how ') !== -1) {
+        addMsg('Use the blue search bar at the top of the homepage or the Top 100 page — type any app name and the list filters instantly. Or just type the app name here and I will find its review.', 'bot'); return;
+      }
+      var best = null, bestScore = 0;
+      posts.forEach(function (p) {
+        var words = appWords(p.title);
+        var score = 0;
+        words.forEach(function (w) { if (n.indexOf(' ' + w + ' ') !== -1) { score++; } });
+        if (score > bestScore) { bestScore = score; best = p; }
+      });
+      if (best && bestScore >= 1) {
+        addMsg('Found it: ' + link(best) + '<br>' + esc(best.desc), 'bot'); return;
+      }
+      addMsg('I could not find that one on the site yet. Try the <a href="/top-100.html">Top 100 page</a>, use the search bar at the top, or type another app name — new reviews are added every 30 minutes.', 'bot');
+    });
+  }
+})();
