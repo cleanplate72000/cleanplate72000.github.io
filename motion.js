@@ -139,14 +139,22 @@
   }
 })();
 
-// The App Wire — analytics: track Google Play download clicks as a conversion event
+// The App Wire — analytics: track Google Play download clicks as a conversion event.
+// The click must reach DigitalPlat BEFORE the browser leaves for Google Play,
+// otherwise the event is lost when the page unloads — so hold navigation briefly.
 document.addEventListener('click', function (e) {
   var t = e.target;
   var a = (t && t.closest) ? t.closest('a[href*="play.google.com"]') : null;
   if (!a) { return; }
+  if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) { return; }
   try {
     if (window.digitalplatAnalytics) {
       window.digitalplatAnalytics.track('google_play_click', { link_domain: 'play.google.com' });
     }
   } catch (err) { /* analytics must never break navigation */ }
+  if (!a.target || a.target === '_self') {
+    e.preventDefault();
+    var href = a.href;
+    setTimeout(function () { window.location.href = href; }, 350);
+  }
 });
