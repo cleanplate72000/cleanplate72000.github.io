@@ -8,7 +8,14 @@ header.site{background:linear-gradient(120deg,var(--indigo),var(--indigo2) 60%,v
 .logo{font-size:1.55rem;font-weight:800;color:#fff;letter-spacing:.3px}.logo span{color:var(--sky)}
 nav.main a{color:#dbeafe;margin-left:18px;font-weight:600;font-size:.95rem}nav.main a:hover{color:#fff;text-decoration:none}
 .hero{padding:34px 0 40px}.hero h1{margin:0 0 8px;font-size:2.1rem;line-height:1.25}.hero p{margin:0;color:#c7d2fe;font-size:1.05rem;max-width:640px}
-.ticker{background:var(--blue);color:#fff;font-size:.85rem;padding:7px 0}.ticker .wrap{display:flex;gap:8px;align-items:center}
+.ticker{background:#0f172a;color:#fff;font-size:.85rem;padding:0;overflow:hidden}.ticker .wrap{display:flex;align-items:stretch}
+.news-label{background:#dc2626;color:#fff;font-weight:800;font-size:.78rem;letter-spacing:.06em;padding:8px 12px;flex-shrink:0;display:flex;align-items:center}
+.ticker-viewport{overflow:hidden;flex:1;display:flex;align-items:center}
+.ticker-track{display:inline-flex;gap:2.2rem;white-space:nowrap;animation:tickscroll 45s linear infinite;padding:8px 0}
+.ticker-track a{color:#fff}.ticker-track a:hover{color:#93c5fd;text-decoration:none}
+.tick-sep{color:#64748b}
+.ticker:hover .ticker-track{animation-play-state:paused}
+@keyframes tickscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 main{padding:28px 0 44px}
 h1.page-title{color:var(--indigo);margin:.2em 0 .6em}
 h2.section-title{color:var(--indigo);font-size:1.5rem;margin:.2em 0 .6em}
@@ -52,6 +59,7 @@ article.post,article.page{animation:fadeIn .5s ease both}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .hero,.hero h1,.hero p,article.post,article.page{animation:none}
+  .ticker-track{animation:none}
   .reveal{opacity:1;transform:none;transition:none}
   .card,.btn,.download-btn,.logo{transition:none}
 }
