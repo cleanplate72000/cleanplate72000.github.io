@@ -186,3 +186,16 @@ footer.site{background:#0f1e3d;-webkit-backdrop-filter:none;backdrop-filter:none
 .chat-send:hover{background:#1d4ed8}
 @media(max-width:480px){.chat-panel{right:12px;bottom:88px;width:calc(100vw - 24px)}}
 @media(prefers-reduced-motion:reduce){.chat-panel,.chat-fab{transition:none}}
+
+/* --- Productive hero: trending panel fills the empty side --- */
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:32px;align-items:start}
+.hero-trending{background:#fff;border:1px solid #e5e8f2;border-radius:16px;box-shadow:0 12px 28px rgba(15,23,42,.25);padding:18px 20px}
+.hero-trending h3{margin:0 0 6px;font-size:1rem;color:#16224a}
+.hero-trend{display:flex;gap:12px;align-items:center;padding:10px 0;border-top:1px solid #eef1f7}
+.hero-trend:first-of-type{border-top:none}
+.hero-trend img{width:56px;height:56px;object-fit:cover;border-radius:12px;flex-shrink:0}
+.hero-trend a{color:#16224a;font-weight:700;text-decoration:none;line-height:1.3}
+.hero-trend a:hover{color:#2563eb}
+.hero-trend span{display:block;font-size:.85rem;color:#5b6474;margin-top:2px}
+.hero-trending .btn{margin-top:12px}
+@media(max-width:760px){.hero-grid{grid-template-columns:1fr}}
