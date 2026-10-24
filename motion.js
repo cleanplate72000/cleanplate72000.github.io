@@ -140,21 +140,40 @@
 })();
 
 // The App Wire — analytics: track Google Play download clicks as a conversion event.
-// The click must reach DigitalPlat BEFORE the browser leaves for Google Play,
-// otherwise the event is lost when the page unloads — so hold navigation briefly.
+// Found in the DigitalPlat SDK itself: track() only QUEUES the event — it is sent
+// by a 5-second timer or on page close. So merely holding navigation 350ms was not
+// enough: the click left before any send happened. This version queues the event,
+// then explicitly flushes the queue and waits for the send to finish before leaving.
 document.addEventListener('click', function (e) {
   var t = e.target;
   var a = (t && t.closest) ? t.closest('a[href*="play.google.com"]') : null;
   if (!a) { return; }
   if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) { return; }
-  try {
-    if (window.digitalplatAnalytics) {
-      window.digitalplatAnalytics.track('google_play_click', { link_domain: 'play.google.com' });
-    }
-  } catch (err) { /* analytics must never break navigation */ }
-  if (!a.target || a.target === '_self') {
-    e.preventDefault();
-    var href = a.href;
-    setTimeout(function () { window.location.href = href; }, 350);
+  if (a.target && a.target !== '_self') {
+    // New-tab click: this page stays alive, so just track and let the timer send it.
+    try {
+      if (window.digitalplatAnalytics) {
+        window.digitalplatAnalytics.track('google_play_click', { link_domain: 'play.google.com' });
+      }
+    } catch (err) { /* analytics must never break navigation */ }
+    return;
   }
+  e.preventDefault();
+  var href = a.href;
+  var done = false;
+  function go() { if (!done) { done = true; window.location.href = href; } }
+  setTimeout(go, 2500); // safety: never trap the visitor if the send hangs
+  try {
+    var sdk = window.digitalplatAnalytics;
+    if (!sdk) { go(); return; }
+    sdk.track('google_play_click', { link_domain: 'play.google.com' });
+    // Defer the flush a beat so the SDK's own click listener (same click)
+    // has queued its event too — then one send carries both.
+    setTimeout(function () {
+      try {
+        var p = sdk.flush();
+        if (p && p.then) { p.then(go, go); } else { go(); }
+      } catch (err) { go(); }
+    }, 50);
+  } catch (err) { go(); }
 });
