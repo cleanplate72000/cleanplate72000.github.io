@@ -11,6 +11,7 @@ nav.main a{color:#dbeafe;margin-left:18px;font-weight:600;font-size:.95rem}nav.m
 .ticker{background:var(--blue);color:#fff;font-size:.85rem;padding:7px 0}.ticker .wrap{display:flex;gap:8px;align-items:center}
 main{padding:28px 0 44px}
 h1.page-title{color:var(--indigo);margin:.2em 0 .6em}
+h2.section-title{color:var(--indigo);font-size:1.5rem;margin:.2em 0 .6em}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px;margin-top:10px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;box-shadow:0 1px 3px rgba(30,27,75,.06)}
 .card .kicker{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
