@@ -199,3 +199,19 @@ footer.site{background:#0f1e3d;-webkit-backdrop-filter:none;backdrop-filter:none
 .hero-trend span{display:block;font-size:.85rem;color:#5b6474;margin-top:2px}
 .hero-trending .btn{margin-top:12px}
 @media(max-width:760px){.hero-grid{grid-template-columns:1fr}}
+
+/* --- Light professional theme: white header, compact light hero, content first --- */
+header.site{background:#fff;color:var(--ink);box-shadow:0 1px 0 #e5e8f2,0 2px 12px rgba(15,23,42,.06);border-bottom:1px solid #e5e8f2}
+.logo{color:#0f1e3d}.logo span{color:#2563eb}
+nav.main a{color:#334155}
+nav.main a:hover{color:#2563eb;background:rgba(37,99,235,.08)}
+.hero{padding:22px 0 26px}
+.hero h1{color:#0f1e3d}
+.hero p{color:#5b6474}
+.hero-cta{margin-top:16px}
+.btn-ghost{background:#fff;color:#2563eb;border:1px solid #2563eb}
+.btn-ghost:hover{background:#eef4ff;text-decoration:none}
+.trustbar{margin-top:16px}
+.trustbar span{color:#334155;background:#fff;border:1px solid #dbe1ee}
+.hero-trending{box-shadow:0 2px 12px rgba(15,23,42,.08)}
+main{padding:20px 0 44px}
