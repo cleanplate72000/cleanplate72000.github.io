@@ -138,3 +138,15 @@
     });
   }
 })();
+
+// The App Wire — analytics: track Google Play download clicks as a conversion event
+document.addEventListener('click', function (e) {
+  var t = e.target;
+  var a = (t && t.closest) ? t.closest('a[href*="play.google.com"]') : null;
+  if (!a) { return; }
+  try {
+    if (window.digitalplatAnalytics) {
+      window.digitalplatAnalytics.track('google_play_click', { link_domain: 'play.google.com' });
+    }
+  } catch (err) { /* analytics must never break navigation */ }
+});
