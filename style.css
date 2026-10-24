@@ -215,3 +215,35 @@ nav.main a:hover{color:#2563eb;background:rgba(37,99,235,.08)}
 .trustbar span{color:#334155;background:#fff;border:1px solid #dbe1ee}
 .hero-trending{box-shadow:0 2px 12px rgba(15,23,42,.08)}
 main{padding:20px 0 44px}
+
+/* --- GOD-level motion upgrade (motion only: transform/opacity, no layout or colour changes) --- */
+/* hero-stagger: headline, intro, CTAs, trust badges and trending panel enter in sequence */
+.hero-main h1{animation:fadeUp .7s cubic-bezier(0.22,1,0.36,1) both}
+.hero-main p{animation:fadeUp .7s .1s cubic-bezier(0.22,1,0.36,1) both}
+.hero-cta{animation:fadeUp .7s .2s cubic-bezier(0.22,1,0.36,1) both}
+.trustbar span{animation:fadeUp .6s cubic-bezier(0.22,1,0.36,1) both}
+.trustbar span:nth-child(1){animation-delay:.24s}
+.trustbar span:nth-child(2){animation-delay:.32s}
+.trustbar span:nth-child(3){animation-delay:.4s}
+.trustbar span:nth-child(4){animation-delay:.48s}
+.hero-trending{animation:fadeUp .8s .35s cubic-bezier(0.22,1,0.36,1) both}
+/* reveal-stagger: smooth eased scroll reveals (delay itself is set per-card in motion.js) */
+.reveal{transition:opacity .7s cubic-bezier(0.22,1,0.36,1),transform .7s cubic-bezier(0.22,1,0.36,1)}
+/* card-img-zoom: gentle lift plus image zoom on hover, transform only */
+.card{transition:transform .45s cubic-bezier(0.22,1,0.36,1),box-shadow .45s cubic-bezier(0.22,1,0.36,1)}
+.card:hover{transform:translateY(-5px)}
+.card-thumb img{transition:transform .7s cubic-bezier(0.22,1,0.36,1)}
+.card:hover .card-thumb img{transform:scale(1.05)}
+/* btn-shine: button glide/shine sweep on hover, transform only */
+.btn,.download-btn{position:relative;overflow:hidden;transition:transform .3s cubic-bezier(0.22,1,0.36,1),box-shadow .3s cubic-bezier(0.22,1,0.36,1)}
+.btn::after,.download-btn::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.35) 50%,transparent 60%);transform:translateX(-130%);transition:transform .7s cubic-bezier(0.22,1,0.36,1);pointer-events:none}
+.btn:hover::after,.download-btn:hover::after{transform:translateX(130%)}
+/* smooth eased transitions for nav, logo and search focus (transform/opacity/box-shadow only) */
+nav.main a,.logo{transition:transform .3s cubic-bezier(0.22,1,0.36,1),opacity .3s cubic-bezier(0.22,1,0.36,1),box-shadow .3s cubic-bezier(0.22,1,0.36,1)}
+.search-box{transition:box-shadow .3s cubic-bezier(0.22,1,0.36,1),background .3s cubic-bezier(0.22,1,0.36,1)}
+@media (prefers-reduced-motion:reduce){
+  .hero-main h1,.hero-main p,.hero-cta,.trustbar span,.hero-trending{animation:none}
+  .card-thumb img{transition:none}
+  .btn::after,.download-btn::after{display:none}
+  .reveal{transition:none}
+}
