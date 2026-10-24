@@ -108,3 +108,21 @@ footer.site{
   border-top:1px solid rgba(255,255,255,.25);
 }
 .copyright{border-top:1px solid rgba(255,255,255,.2)}
+
+/* --- Professional homepage polish --- */
+h2.section-title{color:#fff}
+.section-sub{color:#c7d2fe;margin:0 0 16px;font-size:1rem}
+.card{overflow:hidden;padding:0}
+.card-thumb img{width:100%;height:190px;object-fit:cover;display:block}
+.card-body{padding:18px 20px 22px}
+.card .meta{font-size:.82rem;color:var(--mut);margin:0 0 8px}
+.card.featured{grid-column:1/-1;display:grid;grid-template-columns:1.05fr 1fr}
+.card.featured .card-thumb img{height:100%;min-height:280px}
+.card.featured .card-body{padding:28px}
+.card.featured h2{font-size:1.6rem}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.btn-ghost{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.55)}
+.btn-ghost:hover{background:rgba(255,255,255,.25);text-decoration:none}
+.trustbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.trustbar span{font-size:.85rem;color:#e0e7ff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);padding:6px 13px;border-radius:999px}
+@media(max-width:640px){.card.featured{grid-template-columns:1fr}.card.featured .card-thumb img{height:200px;min-height:0}.card.featured .card-body{padding:20px}}
