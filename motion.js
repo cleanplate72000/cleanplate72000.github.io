@@ -133,7 +133,7 @@
         addMsg('The App Wire is a free app review site. We test trending Android &amp; iPhone apps and publish honest reviews with real Play Store screenshots — downloads only from official stores. More on the <a href="/about.html">About page</a>.', 'bot'); return;
       }
       if (n.indexOf(' search ') !== -1 || n.indexOf(' find ') !== -1 || n.indexOf(' how ') !== -1) {
-        addMsg('Use the blue search bar at the top of the homepage or the Top 100 page — type any app name and the list filters instantly. Or just type the app name here and I will find its review.', 'bot'); return;
+        addMsg('Use the search bar at the top of the homepage or the Top 100 page — type any app name and the list filters instantly. Or just type the app name here and I will find its review.', 'bot'); return;
       }
       var best = null, bestScore = 0;
       posts.forEach(function (p) {
