@@ -157,6 +157,6 @@ footer.site{background:#0f1e3d;-webkit-backdrop-filter:none;backdrop-filter:none
 .copyright{border-top:1px solid rgba(255,255,255,.15)}
 
 /* --- Live search --- */
-.search-wrap{margin:0 0 18px}
-.search-box{width:100%;padding:12px 18px;border:1px solid #dbe1ee;border-radius:999px;font-size:1rem;background:#fff;color:var(--ink);outline:none}
-.search-box:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.15)}
+.search-wrap{margin:0 0 22px}
+.search-box{width:100%;padding:14px 20px;border:2px solid #2563eb;border-radius:999px;font-size:1.05rem;background:#eef4ff;color:var(--ink);outline:none;box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+.search-box:focus{border-color:#1d4ed8;box-shadow:0 0 0 5px rgba(37,99,235,.2);background:#fff}
