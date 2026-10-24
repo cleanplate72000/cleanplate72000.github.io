@@ -6,9 +6,20 @@
     items.forEach(function (el) { el.classList.add('visible'); });
     return;
   }
+  // reveal-stagger: cards in the same grid reveal in sequence (70ms steps, max 3 steps);
+  // the delay is cleared after the reveal so card hover is never delayed.
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
-      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      if (e.isIntersecting) {
+        var el = e.target;
+        if (el.classList.contains('card')) {
+          var sibs = el.parentNode ? el.parentNode.querySelectorAll('.card') : [];
+          var idx = Array.prototype.indexOf.call(sibs, el);
+          if (idx > 0) { el.style.transitionDelay = (Math.min(idx, 3) * 70) + 'ms'; }
+        }
+        el.classList.add('visible'); io.unobserve(el);
+        setTimeout(function () { el.style.transitionDelay = ''; }, 900);
+      }
     });
   }, { threshold: 0.12 });
   items.forEach(function (el) { io.observe(el); });
