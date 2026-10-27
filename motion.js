@@ -178,7 +178,8 @@
       banner.className = 'cookie-banner';
       banner.setAttribute('role', 'dialog');
       banner.setAttribute('aria-label', 'Cookie consent');
-      banner.innerHTML = '<p>We use cookies for anonymous site analytics and, once approved, Google AdSense ads. You can accept cookies or decline them. See our <a href="/privacy-policy.html">Privacy Policy</a>.</p>' +
+      banner.innerHTML = '<p class="cookie-title">We value your privacy</p>' +
+        '<p>We use cookies for anonymous site analytics and, once approved, for Google AdSense ads. You can accept or decline, and change your choice anytime from Cookie settings in the footer. See our <a href="/privacy-policy.html">Privacy Policy</a>.</p>' +
         '<div class="cookie-actions">' +
         '<button class="cookie-btn cookie-accept" type="button">Accept cookies</button>' +
         '<button class="cookie-btn cookie-decline" type="button">Decline</button></div>';
