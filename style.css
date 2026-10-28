@@ -248,19 +248,3 @@ nav.main a,.logo{transition:transform .3s cubic-bezier(0.22,1,0.36,1),opacity .3
   .reveal{transition:none}
 }
 
-/* --- Cookie consent: professional first-visit banner, navy/teal theme, no layout change to content --- */
-.cookie-banner{position:fixed;left:16px;bottom:16px;z-index:9999;width:calc(100vw - 32px);max-width:560px;background:#fff;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 16px 40px rgba(10,37,64,.18);padding:20px;animation:cookie-in .35s ease both}
-@keyframes cookie-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.cookie-banner .cookie-title{margin:0 0 6px;font-size:1rem;line-height:1.4;color:#0A2540;font-weight:800}
-.cookie-banner p{margin:0 0 16px;font-size:.92rem;color:#475569;line-height:1.6}
-.cookie-banner p a{color:#0F766E;font-weight:700;text-decoration:underline;text-underline-offset:2px}
-.cookie-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.cookie-btn{border-radius:8px;padding:11px 20px;font-size:.92rem;cursor:pointer;font-weight:700;line-height:1}
-.cookie-accept{background:#0F766E;color:#fff;border:1px solid #0F766E}
-.cookie-accept:hover{background:#0B5E57;border-color:#0B5E57}
-.cookie-decline{background:#fff;color:#334155;border:1px solid #cbd5e1}
-.cookie-decline:hover{background:#f8fafc;border-color:#94a3b8}
-.cookie-btn:focus-visible{outline:2px solid #0A2540;outline-offset:2px}
-.cookie-banner.hidden{display:none}
-.cookie-settings{background:none;border:none;color:#0F766E;cursor:pointer;font-size:.9rem;text-decoration:underline;padding:0}
-@media (prefers-reduced-motion:reduce){.cookie-banner{transition:none;animation:none}}
